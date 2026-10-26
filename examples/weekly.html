@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>M5週間リフィル｜日曜〜土曜＋週間レビュー</title>
+<style>
+  @page { size: A4 portrait; margin: 0; }
+  :root { color-scheme: light; --rule: #ccc; --grid-color: #ddd; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body { font-family: Arial, "Helvetica Neue", "Hiragino Kaku Gothic ProN", "Yu Gothic", "Noto Sans CJK JP", sans-serif; color: #444; }
+  h2, h3, p, ul, ol { margin: 0; padding: 0; }
+  .sheet { position: relative; width: 210mm; height: 297mm; overflow: hidden; background: white; }
+  /* Physical cut geometry stays at 100%: no scale on slots or artwork. */
+  .front-grid { display: grid; grid-template-columns: repeat(2, 105mm); grid-template-rows: repeat(4, 62mm); width: 210mm; height: 248mm; }
+  .slot { position: relative; width: 105mm; height: 62mm; overflow: hidden; }
+  /* Upright M5 left edge becomes the TOP edge of each A4 slot. */
+  .refill { position: absolute; top: 0; left: 0; width: 62mm; height: 105mm; transform-origin: top left; transform: translateX(105mm) rotate(90deg); }
+  /* Blank punching margin: x=0..12mm. Content also stays 5mm from outer edges. */
+  .content { position: absolute; left: 12mm; top: 5mm; width: 45mm; height: 95mm; }
+  h2 { font-size: 11pt; line-height: 6mm; font-weight: 600; }
+  h3 { font-size: 7.5pt; line-height: 3.5mm; font-weight: 600; letter-spacing: .02em; }
+  .day-header { display: flex; align-items: center; justify-content: space-between; height: 6mm; }
+  .date { display: flex; align-items: baseline; gap: 1mm; font-size: 6.5pt; white-space: nowrap; }
+  .date-blank { display: inline-block; width: 7mm; height: 4.5mm; border-bottom: .1mm solid var(--rule); }
+  .plan { position: absolute; top: 10mm; width: 100%; }
+  .tasks { list-style: none; margin-top: .5mm; }
+  .tasks li { display: flex; align-items: end; gap: 2mm; height: 5mm; }
+  .checkbox { width: 2mm; height: 2mm; border: .1mm solid #aaa; margin-bottom: .6mm; flex-shrink: 0; }
+  .writing-line { display: block; flex: 1; border-bottom: .1mm solid var(--rule); }
+  .good { position: absolute; top: 63mm; width: 100%; }
+  .hint { font-size: 6.3pt; line-height: 3mm; }
+  .good-entries { list-style: none; margin-top: 1mm; }
+  .good-entries li { display: flex; align-items: end; height: 7.2mm; }
+  .review h2 { font-size: 9pt; }
+  .review-section { position: absolute; width: 100%; }
+  .focus { top: 10mm; }
+  .best { top: 22mm; }
+  .satisfaction { top: 40mm; }
+  .experiment { top: 67mm; }
+  .next { top: 85mm; }
+  .ruled-line { height: 6mm; border-bottom: .1mm solid var(--rule); }
+  .best .ruled-line { height: 6mm; }
+  .question { font-size: 7pt; line-height: 3.3mm; margin-top: .5mm; }
+  .rating { display: flex; justify-content: space-between; align-items: center; font-size: 8pt; line-height: 5mm; }
+  .endpoints { font-size: 6.5pt; line-height: 3mm; }
+  .scale-hint { font-size: 6.3pt; line-height: 2.8mm; }
+  .experiment-row { display: flex; justify-content: space-between; align-items: center; height: 4.5mm; font-size: 7pt; }
+  .experiment-row .rating { width: 23mm; line-height: 4.5mm; }
+  .next .ruled-line { height: 6.5mm; }
+  .calibration { position: absolute; top: 248mm; left: 0; width: 210mm; height: 49mm; }
+  .calibration svg, .back-grid { display: block; width: 100%; height: 100%; }
+  .back-grid path { stroke: var(--grid-color); stroke-width: .1; fill: none; }
+  .screen-help { display: none; }
+  @media screen {
+    body { background: #edf0f3; }
+    .screen-help { display: block; max-width: 800px; margin: 18px auto; padding: 0 12px; font-size: 14px; line-height: 1.7; }
+    .screen-help h1 { font-size: 20px; margin: 0 0 8px; }
+    .screen-help p { margin-bottom: 8px; }
+    .page-wrapper { overflow-x: auto; padding-bottom: 22px; }
+    .sheet { margin: 0 auto; box-shadow: 0 2px 10px #0002; }
+  }
+  @media print {
+    .screen-help { display: none !important; }
+    .page-wrapper { margin: 0; padding: 0; overflow: visible; }
+    .sheet { margin: 0; break-inside: avoid; page-break-inside: avoid; }
+    .front { break-after: page; page-break-after: always; }
+    .back { break-after: auto; page-break-after: auto; }
+  }
+</style>
+</head>
+<body>
+<header class="screen-help">
+  <h1>M5週間リフィル｜日曜〜土曜＋週間レビュー</h1>
+  <p>毎晩、当日の GOOD THINGS を書いてから、翌日の日付の PLAN / TO DO を記入します。予定とTODOは同じ欄に自由記入。GOOD THINGS は最大3つ、1〜2個でも構いません。理由は書けるときだけ添えてください。</p>
+  <p>週の初めに THIS WEEK'S FOCUS、週の終わりに残りのレビューを記入します。数値評価は各項目で1つを丸で囲んでください。簡略版の Three Good Things を参考にした生活記録で、特定の研究介入と同じ条件や効果を保証するものではありません。</p>
+  <p><strong>印刷：</strong>A4縦・100%／実際のサイズ・余白なし・自動縮小オフ・ヘッダー/フッターなし。全2ページを両面印刷、またはブラウザからPDF保存できます。背景の印刷をオフにしても罫線と方眼は印刷されます。</p>
+  <p>表面は左上から SUN / MON、TUE / WED、THU / FRI、SAT / WEEKLY REVIEW。各枠は時計回り90°に配置しています。下部49mmを裁断した後、半分ずつ折って8等分すると各62×105mmです。各リフィル左側12mmは穴あけ余白です。</p>
+  <p>試し刷りでは下部の50mm・30mmの目盛りと、裁断線から紙の下端までの49mmを確認してください。49mmは印刷位置にも影響されるため、これだけで倍率を判断しないでください。プリンターの非印字領域、両面の位置ずれ、裏面方眼の濃さは実機で確認してください。調整が必要なら、印刷結果をもとに対話で修正できます。</p>
+</header>
+<main>
+<div class="page-wrapper">
+  <section class="sheet front" aria-label="1ページ目：日曜〜土曜と週間レビューの8枚">
+    <div class="front-grid">
+      <div class="slot">
+        <article class="refill daily" aria-label="SUN：日付、予定・TODO 9行、よかったこと最大3つ">
+          <div class="content">
+            <header class="day-header"><h2>SUN</h2><span class="date">DATE <span class="date-blank"></span> / <span class="date-blank"></span></span></header>
+            <section class="plan"><h3>PLAN / TO DO</h3><ul class="tasks" aria-label="予定・TODOの記入欄">
+              <li><span class="checkbox" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></li>
+              <li><span class="checkbox" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></li>
+              <li><span class="checkbox" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></li>
+              <li><span class="checkbox" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></li>
+              <li><span class="checkbox" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></li>
+              <li><span class="checkbox" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></li>
+              <li><span class="checkbox" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></li>
+              <li><span class="checkbox" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></li>
+              <li><span class="checkbox" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></li>
+            </ul></section>
+            <section class="good"><h3>GOOD THINGS</h3><p class="hint">1〜2個でもOK・理由は書けるときだけ</p>
+              <ol class="good-entries" aria-label="よかったことの記入欄（最大3つ）">
+                <li><span class="writing-line" aria-hidden="true"></span></li>
+                <li><span class="writing-line" aria-hidden="true"></span></li>
+                <li><span class="writing-line" aria-hidden="true"></span></li>
+              </ol>
+            </section>
+          </div>
+        </article>
+      </div>
+      <div class="slot">
+        <article class="refill daily" aria-label="MON：日付、予定・TODO 9行、よかったこと最大3つ">
+          <div class="content">
+            <header class="day-header"><h2>MON</h2><span class="date">DATE <span class="date-blank"></span> / <span class="date-blank"></span></span></header>
+            <section class="plan"><h3>PLAN / TO DO</h3><ul class="tasks" aria-label="予定・TODOの記入欄">
+              <li><span class="checkbox" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></li>
+              <li><span class="checkbox" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></li>
+              <li><span class="checkbox" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></li>
+              <li><span class="checkbox" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></li>
+              <li><span class="checkbox" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></li>
+              <li><span class="checkbox" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></li>
+              <li><span class="checkbox" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></li>
+              <li><span class="checkbox" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></li>
+              <li><span class="checkbox" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></li>
+            </ul></section>
+            <section class="good"><h3>GOOD THINGS</h3><p class="hint">1〜2個でもOK・理由は書けるときだけ</p>
+              <ol class="good-entries" aria-label="よかったことの記入欄（最大3つ）">
+                <li><span class="writing-line" aria-hidden="true"></span></li>
+                <li><span class="writing-line" aria-hidden="true"></span></li>
+                <li><span class="writing-line" aria-hidden="true"></span></li>
+              </ol>
+            </section>
+          </div>
+        </article>
+      </div>
+      <div class="slot">
+        <article class="refill daily" aria-label="TUE：日付、予定・TODO 9行、よかったこと最大3つ">
+          <div class="content">
+            <header class="day-header"><h2>TUE</h2><span class="date">DATE <span class="date-blank"></span> / <span class="date-blank"></span></span></header>
+            <section class="plan"><h3>PLAN / TO DO</h3><ul class="tasks" aria-label="予定・TODOの記入欄">
+              <li><span class="checkbox" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></li>
+              <li><span class="checkbox" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></li>
+              <li><span class="checkbox" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></li>
+              <li><span class="checkbox" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></li>
+              <li><span class="checkbox" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></li>
+              <li><span class="checkbox" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></li>
+              <li><span class="checkbox" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></li>
+              <li><span class="checkbox" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></li>
+              <li><span class="checkbox" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></li>
+            </ul></section>
+            <section class="good"><h3>GOOD THINGS</h3><p class="hint">1〜2個でもOK・理由は書けるときだけ</p>
+              <ol class="good-entries" aria-label="よかったことの記入欄（最大3つ）">
+                <li><span class="writing-line" aria-hidden="true"></span></li>
+                <li><span class="writing-line" aria-hidden="true"></span></li>
+                <li><span class="writing-line" aria-hidden="true"></span></li>
+              </ol>
+            </section>
+          </div>
+        </article>
+      </div>
+      <div class="slot">
+        <article class="refill daily" aria-label="WED：日付、予定・TODO 9行、よかったこと最大3つ">
+          <div class="content">
+            <header class="day-header"><h2>WED</h2><span class="date">DATE <span class="date-blank"></span> / <span class="date-blank"></span></span></header>
+            <section class="plan"><h3>PLAN / TO DO</h3><ul class="tasks" aria-label="予定・TODOの記入欄">
+              <li><span class="checkbox" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></li>
+              <li><span class="checkbox" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></li>
+              <li><span class="checkbox" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></li>
+              <li><span class="checkbox" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></li>
+              <li><span class="checkbox" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></li>
+              <li><span class="checkbox" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></li>
+              <li><span class="checkbox" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></li>
+              <li><span class="checkbox" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></li>
+              <li><span class="checkbox" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></li>
+            </ul></section>
+            <section class="good"><h3>GOOD THINGS</h3><p class="hint">1〜2個でもOK・理由は書けるときだけ</p>
+              <ol class="good-entries" aria-label="よかったことの記入欄（最大3つ）">
+                <li><span class="writing-line" aria-hidden="true"></span></li>
+                <li><span class="writing-line" aria-hidden="true"></span></li>
+                <li><span class="writing-line" aria-hidden="true"></span></li>
+              </ol>
+            </section>
+          </div>
+        </article>
+      </div>
+      <div class="slot">
+        <article class="refill daily" aria-label="THU：日付、予定・TODO 9行、よかったこと最大3つ">
+          <div class="content">
+            <header class="day-header"><h2>THU</h2><span class="date">DATE <span class="date-blank"></span> / <span class="date-blank"></span></span></header>
+            <section class="plan"><h3>PLAN / TO DO</h3><ul class="tasks" aria-label="予定・TODOの記入欄">
+              <li><span class="checkbox" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></li>
+              <li><span class="checkbox" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></li>
+              <li><span class="checkbox" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></li>
+              <li><span class="checkbox" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></li>
+              <li><span class="checkbox" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></li>
+              <li><span class="checkbox" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></li>
+              <li><span class="checkbox" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></li>
+              <li><span class="checkbox" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></li>
+              <li><span class="checkbox" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></li>
+            </ul></section>
+            <section class="good"><h3>GOOD THINGS</h3><p class="hint">1〜2個でもOK・理由は書けるときだけ</p>
+              <ol class="good-entries" aria-label="よかったことの記入欄（最大3つ）">
+                <li><span class="writing-line" aria-hidden="true"></span></li>
+                <li><span class="writing-line" aria-hidden="true"></span></li>
+                <li><span class="writing-line" aria-hidden="true"></span></li>
+              </ol>
+            </section>
+          </div>
+        </article>
+      </div>
+      <div class="slot">
+        <article class="refill daily" aria-label="FRI：日付、予定・TODO 9行、よかったこと最大3つ">
+          <div class="content">
+            <header class="day-header"><h2>FRI</h2><span class="date">DATE <span class="date-blank"></span> / <span class="date-blank"></span></span></header>
+            <section class="plan"><h3>PLAN / TO DO</h3><ul class="tasks" aria-label="予定・TODOの記入欄">
+              <li><span class="checkbox" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></li>
+              <li><span class="checkbox" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></li>
+              <li><span class="checkbox" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></li>
+              <li><span class="checkbox" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></li>
+              <li><span class="checkbox" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></li>
+              <li><span class="checkbox" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></li>
+              <li><span class="checkbox" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></li>
+              <li><span class="checkbox" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></li>
+              <li><span class="checkbox" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></li>
+            </ul></section>
+            <section class="good"><h3>GOOD THINGS</h3><p class="hint">1〜2個でもOK・理由は書けるときだけ</p>
+              <ol class="good-entries" aria-label="よかったことの記入欄（最大3つ）">
+                <li><span class="writing-line" aria-hidden="true"></span></li>
+                <li><span class="writing-line" aria-hidden="true"></span></li>
+                <li><span class="writing-line" aria-hidden="true"></span></li>
+              </ol>
+            </section>
+          </div>
+        </article>
+      </div>
+      <div class="slot">
+        <article class="refill daily" aria-label="SAT：日付、予定・TODO 9行、よかったこと最大3つ">
+          <div class="content">
+            <header class="day-header"><h2>SAT</h2><span class="date">DATE <span class="date-blank"></span> / <span class="date-blank"></span></span></header>
+            <section class="plan"><h3>PLAN / TO DO</h3><ul class="tasks" aria-label="予定・TODOの記入欄">
+              <li><span class="checkbox" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></li>
+              <li><span class="checkbox" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></li>
+              <li><span class="checkbox" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></li>
+              <li><span class="checkbox" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></li>
+              <li><span class="checkbox" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></li>
+              <li><span class="checkbox" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></li>
+              <li><span class="checkbox" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></li>
+              <li><span class="checkbox" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></li>
+              <li><span class="checkbox" aria-hidden="true"></span><span class="writing-line" aria-hidden="true"></span></li>
+            </ul></section>
+            <section class="good"><h3>GOOD THINGS</h3><p class="hint">1〜2個でもOK・理由は書けるときだけ</p>
+              <ol class="good-entries" aria-label="よかったことの記入欄（最大3つ）">
+                <li><span class="writing-line" aria-hidden="true"></span></li>
+                <li><span class="writing-line" aria-hidden="true"></span></li>
+                <li><span class="writing-line" aria-hidden="true"></span></li>
+              </ol>
+            </section>
+          </div>
+        </article>
+      </div>
+      <div class="slot">
+        <article class="refill review" aria-label="週間レビュー">
+          <div class="content">
+            <header><h2>WEEKLY REVIEW</h2></header>
+            <section class="review-section focus"><h3>THIS WEEK'S FOCUS</h3><div class="ruled-line" aria-label="今週の重点・目標の記入欄"></div></section>
+            <section class="review-section best"><h3>BEST OF THE WEEK</h3><div class="ruled-line" aria-label="今週よかったこと・気づきの記入欄"></div><div class="ruled-line"></div></section>
+            <section class="review-section satisfaction">
+              <h3>LIFE SATISFACTION</h3>
+              <p class="question">この1週間の生活全体に、どのくらい満足していますか？</p>
+              <div class="rating" aria-label="満足度：0から10で1つ選択"><span>0</span><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span></div>
+              <p class="endpoints">0 = まったく満足していない<br>10 = 非常に満足している</p>
+            </section>
+            <section class="review-section experiment">
+              <h3>EXPERIMENT REVIEW</h3>
+              <p class="scale-hint">それぞれ1つ選択：1 = 低い ／ 5 = 高い</p>
+              <div class="experiment-row"><span>記入の負担</span><div class="rating" aria-label="記入の負担：1から5"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span></div></div>
+              <div class="experiment-row"><span>役に立った実感</span><div class="rating" aria-label="役に立った実感：1から5"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span></div></div>
+            </section>
+            <section class="review-section next"><h3>NEXT WEEK</h3><div class="ruled-line" aria-label="来週続けたいこと・変えたいことの記入欄"></div></section>
+          </div>
+        </article>
+      </div>
+    </div>
+    <div class="calibration">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 210 49" aria-label="上端から248mmの裁断線、横50mm・縦30mmの測定目盛り">
+        <!-- The only cut line: y=248mm from the top of the A4 sheet. -->
+        <path d="M0 0H210" fill="none" stroke="#888" stroke-width=".2"/>
+        <g fill="none" stroke="#888" stroke-width=".2">
+          <path d="M25 25H75 M25 22V28 M75 22V28 M27 23.5L25 25L27 26.5 M73 23.5L75 25L73 26.5"/>
+          <path d="M170 9V39 M167 9H173 M167 39H173 M168.5 11L170 9L171.5 11 M168.5 37L170 39L171.5 37"/>
+        </g>
+        <g fill="#555" font-size="3" font-family="Arial, sans-serif">
+          <text x="8" y="7">CUT HERE / OFFCUT 49mm</text>
+          <text x="43" y="21">50mm</text><text x="175" y="25">30mm</text>
+          <text x="8" y="44">A4 / PRINT 100% / M5: 62 x 105mm</text>
+        </g>
+      </svg>
+    </div>
+  </section>
+</div>
+<div class="page-wrapper">
+  <section class="sheet back" aria-label="2ページ目：A4全面2mm方眼">
+    <!-- Real SVG strokes print independently of the browser's background setting.
+         viewBox units map to mm: 2-unit pitch and 0.1-unit stroke. -->
+    <svg class="back-grid" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 210 297" aria-label="薄いグレーの2mm方眼">
+      <path d="M0 0V297 M2 0V297 M4 0V297 M6 0V297 M8 0V297 M10 0V297 M12 0V297 M14 0V297 M16 0V297 M18 0V297 M20 0V297 M22 0V297 M24 0V297 M26 0V297 M28 0V297 M30 0V297 M32 0V297 M34 0V297 M36 0V297 M38 0V297 M40 0V297 M42 0V297 M44 0V297 M46 0V297 M48 0V297 M50 0V297 M52 0V297 M54 0V297 M56 0V297 M58 0V297 M60 0V297 M62 0V297 M64 0V297 M66 0V297 M68 0V297 M70 0V297 M72 0V297 M74 0V297 M76 0V297 M78 0V297 M80 0V297 M82 0V297 M84 0V297 M86 0V297 M88 0V297 M90 0V297 M92 0V297 M94 0V297 M96 0V297 M98 0V297 M100 0V297 M102 0V297 M104 0V297 M106 0V297 M108 0V297 M110 0V297 M112 0V297 M114 0V297 M116 0V297 M118 0V297 M120 0V297 M122 0V297 M124 0V297 M126 0V297 M128 0V297 M130 0V297 M132 0V297 M134 0V297 M136 0V297 M138 0V297 M140 0V297 M142 0V297 M144 0V297 M146 0V297 M148 0V297 M150 0V297 M152 0V297 M154 0V297 M156 0V297 M158 0V297 M160 0V297 M162 0V297 M164 0V297 M166 0V297 M168 0V297 M170 0V297 M172 0V297 M174 0V297 M176 0V297 M178 0V297 M180 0V297 M182 0V297 M184 0V297 M186 0V297 M188 0V297 M190 0V297 M192 0V297 M194 0V297 M196 0V297 M198 0V297 M200 0V297 M202 0V297 M204 0V297 M206 0V297 M208 0V297 M210 0V297 M0 0H210 M0 2H210 M0 4H210 M0 6H210 M0 8H210 M0 10H210 M0 12H210 M0 14H210 M0 16H210 M0 18H210 M0 20H210 M0 22H210 M0 24H210 M0 26H210 M0 28H210 M0 30H210 M0 32H210 M0 34H210 M0 36H210 M0 38H210 M0 40H210 M0 42H210 M0 44H210 M0 46H210 M0 48H210 M0 50H210 M0 52H210 M0 54H210 M0 56H210 M0 58H210 M0 60H210 M0 62H210 M0 64H210 M0 66H210 M0 68H210 M0 70H210 M0 72H210 M0 74H210 M0 76H210 M0 78H210 M0 80H210 M0 82H210 M0 84H210 M0 86H210 M0 88H210 M0 90H210 M0 92H210 M0 94H210 M0 96H210 M0 98H210 M0 100H210 M0 102H210 M0 104H210 M0 106H210 M0 108H210 M0 110H210 M0 112H210 M0 114H210 M0 116H210 M0 118H210 M0 120H210 M0 122H210 M0 124H210 M0 126H210 M0 128H210 M0 130H210 M0 132H210 M0 134H210 M0 136H210 M0 138H210 M0 140H210 M0 142H210 M0 144H210 M0 146H210 M0 148H210 M0 150H210 M0 152H210 M0 154H210 M0 156H210 M0 158H210 M0 160H210 M0 162H210 M0 164H210 M0 166H210 M0 168H210 M0 170H210 M0 172H210 M0 174H210 M0 176H210 M0 178H210 M0 180H210 M0 182H210 M0 184H210 M0 186H210 M0 188H210 M0 190H210 M0 192H210 M0 194H210 M0 196H210 M0 198H210 M0 200H210 M0 202H210 M0 204H210 M0 206H210 M0 208H210 M0 210H210 M0 212H210 M0 214H210 M0 216H210 M0 218H210 M0 220H210 M0 222H210 M0 224H210 M0 226H210 M0 228H210 M0 230H210 M0 232H210 M0 234H210 M0 236H210 M0 238H210 M0 240H210 M0 242H210 M0 244H210 M0 246H210 M0 248H210 M0 250H210 M0 252H210 M0 254H210 M0 256H210 M0 258H210 M0 260H210 M0 262H210 M0 264H210 M0 266H210 M0 268H210 M0 270H210 M0 272H210 M0 274H210 M0 276H210 M0 278H210 M0 280H210 M0 282H210 M0 284H210 M0 286H210 M0 288H210 M0 290H210 M0 292H210 M0 294H210 M0 296H210"/>
+    </svg>
+  </section>
+</div>
+</main>
+</body>
+</html>

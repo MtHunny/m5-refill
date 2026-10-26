@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>M5 筋トレリフィル｜A4両面印刷テスト</title>
+<style>
+  /* Physical trim: M5 = 62×105 mm. A4 = 210×297 mm. */
+  @page { size: A4 portrait; margin: 0; }
+  :root { color-scheme: light; }
+  * { box-sizing: border-box; }
+  html, body { padding: 0; margin: 0; }
+  body { font-family: Arial, "Noto Sans", "Helvetica Neue", sans-serif; color: #3d3d3d; }
+  .sheet { width: 210mm; height: 297mm; position: relative; overflow: hidden; background: #fff; }
+  .front-grid { position: absolute; left: 0; top: 0; display: grid; grid-template-columns: 105mm 105mm; grid-template-rows: repeat(4, 62mm); width: 210mm; height: 248mm; }
+  .slot { position: relative; width: 105mm; height: 62mm; overflow: hidden; }
+  /* Rotate each upright 62×105 mm M5 refill clockwise into its 105×62 mm A4 slot. */
+  .refill { position: absolute; top: 0; left: 0; width: 62mm; height: 105mm; transform-origin: top left; transform: translateX(105mm) rotate(90deg); }
+  /* Light 99% reduction of ARTWORK ONLY: never shrink the M5 cut dimensions. */
+  .refill-inner { position: absolute; width: 62mm; height: 105mm; left: 0; top: 0; transform: scale(.99); transform-origin: 31mm 52.5mm; font-size: 5.2pt; }
+  /* Left margin (0..12mm) is blank for punching holes. */
+  .meta { position: absolute; left: 12mm; top: 7mm; width: 45mm; display: grid; grid-template-columns: 16mm 26mm; column-gap: 3mm; }
+  .field { min-width: 0; display: flex; flex-direction: column; gap: 1.7mm; }
+  .field-label { font-size: 5pt; line-height: 1; letter-spacing: .04em; }
+  .field-line { display: block; width: 100%; height: 0; border-bottom: .12mm solid #acacac; }
+  .table-head { position: absolute; left: 12mm; top: 22mm; display: grid; grid-template-columns: 10mm 32mm; gap: 1mm; width: 43mm; font-size: 4.6pt; color: #707070; letter-spacing: .03em; }
+  .sets { position: absolute; left: 12mm; top: 28mm; width: 43mm; }
+  .set-row { height: 6.6mm; width: 43mm; display: grid; grid-template-columns: 10mm 32mm; gap: 1mm; align-items: end; padding-bottom: 1.4mm; }
+  .set-no { font-size: 5.4pt; line-height: 1; padding-left: .3mm; }
+  .entry-line { display: block; height: 0; border-bottom: .10mm solid #b5b5b5; }
+  .calibration { position: absolute; left: 0; top: 248mm; width: 210mm; height: 49mm; }
+  .calibration svg { display: block; width: 210mm; height: 49mm; }
+  .back-grid { display: block; width: 210mm; height: 297mm; }
+  .back-grid path { vector-effect: none; }
+  .screen-help { display: none; }
+  @media screen {
+    body { background: #edf0f3; }
+    .screen-help { display: block; max-width: 800px; margin: 18px auto; padding: 0 12px; font-size: 14px; line-height: 1.6; }
+    .screen-help h1 { font-size: 18px; margin: 0 0 6px; font-weight: 600; }
+    .screen-help p { margin: 0 0 8px; }
+    .sheet { margin: 0 auto 22px; box-shadow: 0 2px 10px #0002; }
+    .page-wrapper { max-width: 100%; overflow-x: auto; padding: 0 0 8px; }
+  }
+  @media print {
+    .screen-help { display: none !important; }
+    .page-wrapper { overflow: visible !important; padding: 0; margin: 0; }
+    .sheet { margin: 0; box-shadow: none; break-inside: avoid; page-break-inside: avoid; }
+    .sheet.front { break-after: page; page-break-after: always; }
+    .sheet.back { break-after: auto; page-break-after: auto; }
+  }
+</style>
+</head>
+<body>
+<header class="screen-help">
+  <h1>M5筋トレリフィル｜両面印刷テスト</h1>
+  <p>1ページ目はM5 8枚（各62×105mm）、2ページ目はA4全面の薄い2mm方眼です。表面は下49mmのみ切り落とし、その後は半分に折って分割する想定です。</p>
+  <p><strong>印刷：</strong>ブラウザで印刷（Ctrl/⌘ + P）→ A4・縦・倍率100%／実際のサイズ・余白なし・ヘッダー/フッターなし。両面印刷またはPDF保存を選べます。プリンターの非印字領域は欠けます。</p>
+  <p>校正：表面下側の<strong>49mm</strong>（裁断線〜紙の下端）と<strong>50mm・30mm</strong>（矢印両端）を測定。裏面は実際の印刷で濃さを確認してください。</p>
+</header>
+<main>
+<div class="page-wrapper">
+  <section class="sheet front" aria-label="1ページ目：筋トレリフィル8枚">
+    <div class="front-grid"><div class="slot"><div class="refill" aria-label="筋トレ記録。日付、種目名、10セット分の回数記入欄">
+  <div class="refill-inner">
+    <div class="meta">
+      <div class="field"><span class="field-label">DATE</span><span class="field-line"></span></div>
+      <div class="field"><span class="field-label">EXERCISE</span><span class="field-line"></span></div>
+    </div>
+    <div class="table-head"><span>SET</span><span>REPS</span></div>
+    <div class="sets"><div class="set-row"><span class="set-no">01</span><span class="entry-line" aria-hidden="true"></span></div>
+<div class="set-row"><span class="set-no">02</span><span class="entry-line" aria-hidden="true"></span></div>
+<div class="set-row"><span class="set-no">03</span><span class="entry-line" aria-hidden="true"></span></div>
+<div class="set-row"><span class="set-no">04</span><span class="entry-line" aria-hidden="true"></span></div>
+<div class="set-row"><span class="set-no">05</span><span class="entry-line" aria-hidden="true"></span></div>
+<div class="set-row"><span class="set-no">06</span><span class="entry-line" aria-hidden="true"></span></div>
+<div class="set-row"><span class="set-no">07</span><span class="entry-line" aria-hidden="true"></span></div>
+<div class="set-row"><span class="set-no">08</span><span class="entry-line" aria-hidden="true"></span></div>
+<div class="set-row"><span class="set-no">09</span><span class="entry-line" aria-hidden="true"></span></div>
+<div class="set-row"><span class="set-no">10</span><span class="entry-line" aria-hidden="true"></span></div></div>
+  </div>
+</div></div>
+<div class="slot"><div class="refill" aria-label="筋トレ記録。日付、種目名、10セット分の回数記入欄">
+  <div class="refill-inner">
+    <div class="meta">
+      <div class="field"><span class="field-label">DATE</span><span class="field-line"></span></div>
+      <div class="field"><span class="field-label">EXERCISE</span><span class="field-line"></span></div>
+    </div>
+    <div class="table-head"><span>SET</span><span>REPS</span></div>
+    <div class="sets"><div class="set-row"><span class="set-no">01</span><span class="entry-line" aria-hidden="true"></span></div>
+<div class="set-row"><span class="set-no">02</span><span class="entry-line" aria-hidden="true"></span></div>
+<div class="set-row"><span class="set-no">03</span><span class="entry-line" aria-hidden="true"></span></div>
+<div class="set-row"><span class="set-no">04</span><span class="entry-line" aria-hidden="true"></span></div>
+<div class="set-row"><span class="set-no">05</span><span class="entry-line" aria-hidden="true"></span></div>
+<div class="set-row"><span class="set-no">06</span><span class="entry-line" aria-hidden="true"></span></div>
+<div class="set-row"><span class="set-no">07</span><span class="entry-line" aria-hidden="true"></span></div>
+<div class="set-row"><span class="set-no">08</span><span class="entry-line" aria-hidden="true"></span></div>
+<div class="set-row"><span class="set-no">09</span><span class="entry-line" aria-hidden="true"></span></div>
+<div class="set-row"><span class="set-no">10</span><span class="entry-line" aria-hidden="true"></span></div></div>
+  </div>
+</div></div>
+<div class="slot"><div class="refill" aria-label="筋トレ記録。日付、種目名、10セット分の回数記入欄">
+  <div class="refill-inner">
+    <div class="meta">
+      <div class="field"><span class="field-label">DATE</span><span class="field-line"></span></div>
+      <div class="field"><span class="field-label">EXERCISE</span><span class="field-line"></span></div>
+    </div>
+    <div class="table-head"><span>SET</span><span>REPS</span></div>
+    <div class="sets"><div class="set-row"><span class="set-no">01</span><span class="entry-line" aria-hidden="true"></span></div>
+<div class="set-row"><span class="set-no">02</span><span class="entry-line" aria-hidden="true"></span></div>
+<div class="set-row"><span class="set-no">03</span><span class="entry-line" aria-hidden="true"></span></div>
+<div class="set-row"><span class="set-no">04</span><span class="entry-line" aria-hidden="true"></span></div>
+<div class="set-row"><span class="set-no">05</span><span class="entry-line" aria-hidden="true"></span></div>
+<div class="set-row"><span class="set-no">06</span><span class="entry-line" aria-hidden="true"></span></div>
+<div class="set-row"><span class="set-no">07</span><span class="entry-line" aria-hidden="true"></span></div>
+<div class="set-row"><span class="set-no">08</span><span class="entry-line" aria-hidden="true"></span></div>
+<div class="set-row"><span class="set-no">09</span><span class="entry-line" aria-hidden="true"></span></div>
+<div class="set-row"><span class="set-no">10</span><span class="entry-line" aria-hidden="true"></span></div></div>
+  </div>
+</div></div>
+<div class="slot"><div class="refill" aria-label="筋トレ記録。日付、種目名、10セット分の回数記入欄">
+  <div class="refill-inner">
+    <div class="meta">
+      <div class="field"><span class="field-label">DATE</span><span class="field-line"></span></div>
+      <div class="field"><span class="field-label">EXERCISE</span><span class="field-line"></span></div>
+    </div>
+    <div class="table-head"><span>SET</span><span>REPS</span></div>
+    <div class="sets"><div class="set-row"><span class="set-no">01</span><span class="entry-line" aria-hidden="true"></span></div>
+<div class="set-row"><span class="set-no">02</span><span class="entry-line" aria-hidden="true"></span></div>
+<div class="set-row"><span class="set-no">03</span><span class="entry-line" aria-hidden="true"></span></div>
+<div class="set-row"><span class="set-no">04</span><span class="entry-line" aria-hidden="true"></span></div>
+<div class="set-row"><span class="set-no">05</span><span class="entry-line" aria-hidden="true"></span></div>
+<div class="set-row"><span class="set-no">06</span><span class="entry-line" aria-hidden="true"></span></div>
+<div class="set-row"><span class="set-no">07</span><span class="entry-line" aria-hidden="true"></span></div>
+<div class="set-row"><span class="set-no">08</span><span class="entry-line" aria-hidden="true"></span></div>
+<div class="set-row"><span class="set-no">09</span><span class="entry-line" aria-hidden="true"></span></div>
+<div class="set-row"><span class="set-no">10</span><span class="entry-line" aria-hidden="true"></span></div></div>
+  </div>
+</div></div>
+<div class="slot"><div class="refill" aria-label="筋トレ記録。日付、種目名、10セット分の回数記入欄">
+  <div class="refill-inner">
+    <div class="meta">
+      <div class="field"><span class="field-label">DATE</span><span class="field-line"></span></div>
+      <div class="field"><span class="field-label">EXERCISE</span><span class="field-line"></span></div>
+    </div>
+    <div class="table-head"><span>SET</span><span>REPS</span></div>
+    <div class="sets"><div class="set-row"><span class="set-no">01</span><span class="entry-line" aria-hidden="true"></span></div>
+<div class="set-row"><span class="set-no">02</span><span class="entry-line" aria-hidden="true"></span></div>
+<div class="set-row"><span class="set-no">03</span><span class="entry-line" aria-hidden="true"></span></div>
+<div class="set-row"><span class="set-no">04</span><span class="entry-line" aria-hidden="true"></span></div>
+<div class="set-row"><span class="set-no">05</span><span class="entry-line" aria-hidden="true"></span></div>
+<div class="set-row"><span class="set-no">06</span><span class="entry-line" aria-hidden="true"></span></div>
+<div class="set-row"><span class="set-no">07</span><span class="entry-line" aria-hidden="true"></span></div>
+<div class="set-row"><span class="set-no">08</span><span class="entry-line" aria-hidden="true"></span></div>
+<div class="set-row"><span class="set-no">09</span><span class="entry-line" aria-hidden="true"></span></div>
+<div class="set-row"><span class="set-no">10</span><span class="entry-line" aria-hidden="true"></span></div></div>
+  </div>
+</div></div>
+<div class="slot"><div class="refill" aria-label="筋トレ記録。日付、種目名、10セット分の回数記入欄">
+  <div class="refill-inner">
+    <div class="meta">
+      <div class="field"><span class="field-label">DATE</span><span class="field-line"></span></div>
+      <div class="field"><span class="field-label">EXERCISE</span><span class="field-line"></span></div>
+    </div>
+    <div class="table-head"><span>SET</span><span>REPS</span></div>
+    <div class="sets"><div class="set-row"><span class="set-no">01</span><span class="entry-line" aria-hidden="true"></span></div>
+<div class="set-row"><span class="set-no">02</span><span class="entry-line" aria-hidden="true"></span></div>
+<div class="set-row"><span class="set-no">03</span><span class="entry-line" aria-hidden="true"></span></div>
+<div class="set-row"><span class="set-no">04</span><span class="entry-line" aria-hidden="true"></span></div>
+<div class="set-row"><span class="set-no">05</span><span class="entry-line" aria-hidden="true"></span></div>
+<div class="set-row"><span class="set-no">06</span><span class="entry-line" aria-hidden="true"></span></div>
+<div class="set-row"><span class="set-no">07</span><span class="entry-line" aria-hidden="true"></span></div>
+<div class="set-row"><span class="set-no">08</span><span class="entry-line" aria-hidden="true"></span></div>
+<div class="set-row"><span class="set-no">09</span><span class="entry-line" aria-hidden="true"></span></div>
+<div class="set-row"><span class="set-no">10</span><span class="entry-line" aria-hidden="true"></span></div></div>
+  </div>
+</div></div>
+<div class="slot"><div class="refill" aria-label="筋トレ記録。日付、種目名、10セット分の回数記入欄">
+  <div class="refill-inner">
+    <div class="meta">
+      <div class="field"><span class="field-label">DATE</span><span class="field-line"></span></div>
+      <div class="field"><span class="field-label">EXERCISE</span><span class="field-line"></span></div>
+    </div>
+    <div class="table-head"><span>SET</span><span>REPS</span></div>
+    <div class="sets"><div class="set-row"><span class="set-no">01</span><span class="entry-line" aria-hidden="true"></span></div>
+<div class="set-row"><span class="set-no">02</span><span class="entry-line" aria-hidden="true"></span></div>
+<div class="set-row"><span class="set-no">03</span><span class="entry-line" aria-hidden="true"></span></div>
+<div class="set-row"><span class="set-no">04</span><span class="entry-line" aria-hidden="true"></span></div>
+<div class="set-row"><span class="set-no">05</span><span class="entry-line" aria-hidden="true"></span></div>
+<div class="set-row"><span class="set-no">06</span><span class="entry-line" aria-hidden="true"></span></div>
+<div class="set-row"><span class="set-no">07</span><span class="entry-line" aria-hidden="true"></span></div>
+<div class="set-row"><span class="set-no">08</span><span class="entry-line" aria-hidden="true"></span></div>
+<div class="set-row"><span class="set-no">09</span><span class="entry-line" aria-hidden="true"></span></div>
+<div class="set-row"><span class="set-no">10</span><span class="entry-line" aria-hidden="true"></span></div></div>
+  </div>
+</div></div>
+<div class="slot"><div class="refill" aria-label="筋トレ記録。日付、種目名、10セット分の回数記入欄">
+  <div class="refill-inner">
+    <div class="meta">
+      <div class="field"><span class="field-label">DATE</span><span class="field-line"></span></div>
+      <div class="field"><span class="field-label">EXERCISE</span><span class="field-line"></span></div>
+    </div>
+    <div class="table-head"><span>SET</span><span>REPS</span></div>
+    <div class="sets"><div class="set-row"><span class="set-no">01</span><span class="entry-line" aria-hidden="true"></span></div>
+<div class="set-row"><span class="set-no">02</span><span class="entry-line" aria-hidden="true"></span></div>
+<div class="set-row"><span class="set-no">03</span><span class="entry-line" aria-hidden="true"></span></div>
+<div class="set-row"><span class="set-no">04</span><span class="entry-line" aria-hidden="true"></span></div>
+<div class="set-row"><span class="set-no">05</span><span class="entry-line" aria-hidden="true"></span></div>
+<div class="set-row"><span class="set-no">06</span><span class="entry-line" aria-hidden="true"></span></div>
+<div class="set-row"><span class="set-no">07</span><span class="entry-line" aria-hidden="true"></span></div>
+<div class="set-row"><span class="set-no">08</span><span class="entry-line" aria-hidden="true"></span></div>
+<div class="set-row"><span class="set-no">09</span><span class="entry-line" aria-hidden="true"></span></div>
+<div class="set-row"><span class="set-no">10</span><span class="entry-line" aria-hidden="true"></span></div></div>
+  </div>
+</div></div></div>
+    <div class="calibration" aria-label="裁断線と印刷実寸確認用の50、30、49ミリの目印">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 210 49" aria-label="裁断線は下端から49mm。横50mm、縦30mmの測定線あり">
+        <g fill="none" stroke="#656565" stroke-width="0.26">
+          <path d="M8 0 H202" />
+          <path d="M29 26 H79 M29 22 V30 M79 22 V30" />
+          <path d="M177 9 V39 M173 9 H181 M173 39 H181" />
+          <path d="M111 0 V49" stroke-width="0.22" />
+          <!-- Arrowheads at the endpoints. -->
+          <path d="M31 24.4 L29 26 L31 27.6 M77 24.4 L79 26 L77 27.6" />
+          <path d="M175.4 11 L177 9 L178.6 11 M175.4 37 L177 39 L178.6 37" />
+          <path d="M109.4 2 L111 0 L112.6 2 M109.4 47 L111 49 L112.6 47" />
+        </g>
+        <g fill="#444" font-family="Arial, Helvetica, sans-serif" font-size="3.0">
+          <text x="8.5" y="5.2">CUT HERE</text>
+          <text x="43.5" y="21.7">50mm</text>
+          <text x="181.4" y="25">30mm</text>
+          <text x="116.3" y="24.5">49mm</text>
+        </g>
+        <g fill="#666" font-size="2.1" font-family="Arial, Helvetica, sans-serif">
+          <text x="29" y="32.3">tick to tick</text>
+          <text x="181.4" y="29">tick to tick</text>
+          <text x="116.3" y="28">cut line to paper edge</text>
+          <text x="8" y="44">A4 / PRINT 100% / ARTWORK 99% / M5: 62 x 105mm</text>
+        </g>
+      </svg>
+    </div>
+  </section>
+</div>
+<div class="page-wrapper">
+  <section class="sheet back" aria-label="2ページ目：A4全面2ミリ方眼">
+    <svg class="back-grid" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 210 297" preserveAspectRatio="none" aria-label="薄いグレーで2ミリ間隔の全面方眼">
+      <path d="M0 0V297 M2 0V297 M4 0V297 M6 0V297 M8 0V297 M10 0V297 M12 0V297 M14 0V297 M16 0V297 M18 0V297 M20 0V297 M22 0V297 M24 0V297 M26 0V297 M28 0V297 M30 0V297 M32 0V297 M34 0V297 M36 0V297 M38 0V297 M40 0V297 M42 0V297 M44 0V297 M46 0V297 M48 0V297 M50 0V297 M52 0V297 M54 0V297 M56 0V297 M58 0V297 M60 0V297 M62 0V297 M64 0V297 M66 0V297 M68 0V297 M70 0V297 M72 0V297 M74 0V297 M76 0V297 M78 0V297 M80 0V297 M82 0V297 M84 0V297 M86 0V297 M88 0V297 M90 0V297 M92 0V297 M94 0V297 M96 0V297 M98 0V297 M100 0V297 M102 0V297 M104 0V297 M106 0V297 M108 0V297 M110 0V297 M112 0V297 M114 0V297 M116 0V297 M118 0V297 M120 0V297 M122 0V297 M124 0V297 M126 0V297 M128 0V297 M130 0V297 M132 0V297 M134 0V297 M136 0V297 M138 0V297 M140 0V297 M142 0V297 M144 0V297 M146 0V297 M148 0V297 M150 0V297 M152 0V297 M154 0V297 M156 0V297 M158 0V297 M160 0V297 M162 0V297 M164 0V297 M166 0V297 M168 0V297 M170 0V297 M172 0V297 M174 0V297 M176 0V297 M178 0V297 M180 0V297 M182 0V297 M184 0V297 M186 0V297 M188 0V297 M190 0V297 M192 0V297 M194 0V297 M196 0V297 M198 0V297 M200 0V297 M202 0V297 M204 0V297 M206 0V297 M208 0V297 M210 0V297 M0 0H210 M0 2H210 M0 4H210 M0 6H210 M0 8H210 M0 10H210 M0 12H210 M0 14H210 M0 16H210 M0 18H210 M0 20H210 M0 22H210 M0 24H210 M0 26H210 M0 28H210 M0 30H210 M0 32H210 M0 34H210 M0 36H210 M0 38H210 M0 40H210 M0 42H210 M0 44H210 M0 46H210 M0 48H210 M0 50H210 M0 52H210 M0 54H210 M0 56H210 M0 58H210 M0 60H210 M0 62H210 M0 64H210 M0 66H210 M0 68H210 M0 70H210 M0 72H210 M0 74H210 M0 76H210 M0 78H210 M0 80H210 M0 82H210 M0 84H210 M0 86H210 M0 88H210 M0 90H210 M0 92H210 M0 94H210 M0 96H210 M0 98H210 M0 100H210 M0 102H210 M0 104H210 M0 106H210 M0 108H210 M0 110H210 M0 112H210 M0 114H210 M0 116H210 M0 118H210 M0 120H210 M0 122H210 M0 124H210 M0 126H210 M0 128H210 M0 130H210 M0 132H210 M0 134H210 M0 136H210 M0 138H210 M0 140H210 M0 142H210 M0 144H210 M0 146H210 M0 148H210 M0 150H210 M0 152H210 M0 154H210 M0 156H210 M0 158H210 M0 160H210 M0 162H210 M0 164H210 M0 166H210 M0 168H210 M0 170H210 M0 172H210 M0 174H210 M0 176H210 M0 178H210 M0 180H210 M0 182H210 M0 184H210 M0 186H210 M0 188H210 M0 190H210 M0 192H210 M0 194H210 M0 196H210 M0 198H210 M0 200H210 M0 202H210 M0 204H210 M0 206H210 M0 208H210 M0 210H210 M0 212H210 M0 214H210 M0 216H210 M0 218H210 M0 220H210 M0 222H210 M0 224H210 M0 226H210 M0 228H210 M0 230H210 M0 232H210 M0 234H210 M0 236H210 M0 238H210 M0 240H210 M0 242H210 M0 244H210 M0 246H210 M0 248H210 M0 250H210 M0 252H210 M0 254H210 M0 256H210 M0 258H210 M0 260H210 M0 262H210 M0 264H210 M0 266H210 M0 268H210 M0 270H210 M0 272H210 M0 274H210 M0 276H210 M0 278H210 M0 280H210 M0 282H210 M0 284H210 M0 286H210 M0 288H210 M0 290H210 M0 292H210 M0 294H210 M0 296H210" fill="none" stroke="#dddddd" stroke-width="0.1" />
+    </svg>
+  </section>
+</div>
+</main>
+</body>
+</html>
